@@ -1,0 +1,13 @@
+{
+  "ID": "BAFA7322CD514DC7850FA5786FB55F23",
+  "ActionKeyword": "=",
+  "IsGlobal": true,
+  "Name": "PowerToysCommands",
+  "Author": "david-risney",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://aka.ms/powertoys",
+  "ExecuteFileName": "Microsoft.PowerToys.Run.Plugin.PowerToysCommands.dll",
+  "IcoPathDark": "Images\\icon.dark.png",
+  "IcoPathLight": "Images\\icon.light.png"
+}

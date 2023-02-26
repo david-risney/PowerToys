@@ -3,13 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using System.DirectoryServices;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using interop;
-using Microsoft.PowerToys.Settings.UI.Library;
-using Microsoft.PowerToys.Settings.UI.Views;
 using Wox.Plugin;
 
 namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
@@ -22,23 +19,28 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
             {
                 CreateResult(
                     "PowerToys ColorPicker",
-                    "Start PowerToys ColorPicker",
+                    "images/ColorPicker.png",
+                    "Run PowerToys Color Picker",
                     Command.ColorPicker),
                 CreateResult(
                     "PowerToys FancyZones Editor",
-                    "Start PowerToys Fancy Zones Editor",
+                    "images/FancyZones.png",
+                    "Run PowerToys FancyZones Editor",
                     Command.FancyZonesEditor),
                 CreateResult(
                     "PowerToys MeasureTool",
-                    "Start PowerToys MeasureTool",
+                    "images/MeasureTool.png",
+                    "Run PowerToys Measure Tool",
                     Command.MeasureTool),
                 CreateResult(
-                    "PowerToys PowerOCR",
-                    "Start PowerToys PowerOCR",
+                    "PowerToys Text Extractor",
+                    "images/PowerOCR.png",
+                    "Run PowerToys Text Extractor",
                     Command.PowerOCR),
                 CreateResult(
                     "PowerToys Shortcut Guide",
-                    "Start PowerToys Shortcut Guide",
+                    "images/ShortcutGuide.png",
+                    "Show PowerToys Shortcut Guide",
                     Command.ShortcutGuide),
             };
         }
@@ -52,20 +54,18 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
             ShortcutGuide,
         }
 
-        private Result CreateResult(string title, string subTitle, Command command)
+        private Result CreateResult(string title, string iconPath, string subTitle, Command command)
         {
             return new Result
             {
                 // Using CurrentCulture since this is user facing
                 Title = title,
-                IcoPath = IconPath,
+                IcoPath = iconPath,
                 Score = 300,
                 SubTitle = subTitle,
                 Action = c => Action(command),
             };
         }
-
-        public string IconPath { get; set; }
 
         public List<Result> AllCommands { get; private set; }
 

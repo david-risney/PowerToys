@@ -21,7 +21,7 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 
         public string Name => "PowerToysCommands";
 
-        public string Description => "Run PowerToys commands from PowerToys Launcher";
+        public string Description => "Run PowerToys tools from PowerToys Launcher";
 
         private bool _disposed;
         private ResultHelper _resultHelper = new ResultHelper();
@@ -50,26 +50,6 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 
         public void Init(PluginInitContext context)
         {
-            Context = context ?? throw new ArgumentNullException(paramName: nameof(context));
-
-            Context.API.ThemeChanged += OnThemeChanged;
-            UpdateIconPath(Context.API.GetCurrentTheme());
-        }
-
-        private void UpdateIconPath(Theme theme)
-        {
-            string path = "Images/icon.dark.png";
-            if (theme == Theme.Light || theme == Theme.HighContrastWhite)
-            {
-                path = "Images/icon.light.png";
-            }
-
-            _resultHelper.IconPath = path;
-        }
-
-        private void OnThemeChanged(Theme currentTheme, Theme newTheme)
-        {
-            UpdateIconPath(newTheme);
         }
 
         public string GetTranslatedPluginTitle()
@@ -103,11 +83,6 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
             {
                 if (disposing)
                 {
-                    if (Context != null && Context.API != null)
-                    {
-                        Context.API.ThemeChanged -= OnThemeChanged;
-                    }
-
                     _disposed = true;
                 }
             }

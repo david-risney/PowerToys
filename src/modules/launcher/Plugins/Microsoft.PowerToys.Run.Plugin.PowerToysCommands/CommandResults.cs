@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -14,8 +13,10 @@ using Wox.Plugin;
 
 namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 {
-    public class ResultHelper
+    public class CommandResults
     {
+        // Enum of the different PowerToys Commands
+        // sorted alphabetically.
         private enum Command
         {
             ColorPicker,
@@ -25,8 +26,12 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
             ShortcutGuide,
         }
 
-        public ResultHelper()
+        public CommandResults()
         {
+            // The different PowerToys Commands Results
+            // sorted alphabetically. This should be one to
+            // one with the Command enum and Result indicies should
+            // match their corresponding enum value.
             AllCommandResults = new List<Result>
             {
                 CreateResult(
@@ -104,19 +109,21 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 
         private static bool Action(Command command)
         {
-            var ret = false;
+            bool actionWasApplied;
 
             switch (command)
             {
-                case Command.ColorPicker: ret = SetEvent(Constants.ShowColorPickerSharedEvent()); break;
-                case Command.FancyZonesEditor: ret = SetEvent(Constants.FZEToggleEvent()); break;
-                case Command.MeasureTool: ret = SetEvent(Constants.MeasureToolTriggerEvent()); break;
-                case Command.PowerOCR: ret = SetEvent(Constants.ShowPowerOCRSharedEvent()); break;
-                case Command.ShortcutGuide: ret = SetEvent(Constants.ShortcutGuideTriggerEvent()); break;
-                default: MessageBox.Show("Error: PowerToysCommands Command enum not implemented " + command); break;
+                case Command.ColorPicker: actionWasApplied = SetEvent(Constants.ShowColorPickerSharedEvent()); break;
+                case Command.FancyZonesEditor: actionWasApplied = SetEvent(Constants.FZEToggleEvent()); break;
+                case Command.MeasureTool: actionWasApplied = SetEvent(Constants.MeasureToolTriggerEvent()); break;
+                case Command.PowerOCR: actionWasApplied = SetEvent(Constants.ShowPowerOCRSharedEvent()); break;
+                case Command.ShortcutGuide: actionWasApplied = SetEvent(Constants.ShortcutGuideTriggerEvent()); break;
+                default: throw new NotImplementedException(
+                    "Microsoft.PowerToys.Run.Plugin.PowerToysCommands.CommandResults command enum not implemented: "
+                    + command);
             }
 
-            return ret;
+            return actionWasApplied;
         }
     }
 }

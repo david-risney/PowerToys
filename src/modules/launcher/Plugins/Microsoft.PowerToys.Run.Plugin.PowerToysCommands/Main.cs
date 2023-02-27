@@ -4,13 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using ManagedCommon;
 using Microsoft.PowerToys.Run.Plugin.PowerToysCommands.Properties;
-using Microsoft.PowerToys.Settings.UI.Library;
 using Wox.Plugin;
 
 namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
@@ -25,7 +20,7 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 
         public string Description => Resources.PluginDescription;
 
-        private ResultHelper _resultHelper = new ResultHelper();
+        private static CommandResults _commandResults = new CommandResults();
 
         public List<Result> Query(Query query)
         {
@@ -40,7 +35,7 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
                 return new List<Result>();
             }
 
-            return _resultHelper.GetCommandsMatchingQuery(query).ToList();
+            return _commandResults.GetCommandsMatchingQuery(query).ToList();
         }
 
         public string GetTranslatedPluginTitle() => Name;

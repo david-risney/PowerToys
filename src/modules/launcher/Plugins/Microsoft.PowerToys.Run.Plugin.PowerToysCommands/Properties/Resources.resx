@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PluginDescription" xml:space="preserve">
+    <value>Run PowerToys commands from PowerToys Run</value>
+  </data>
+  <data name="PluginTitle" xml:space="preserve">
+    <value>PowerToys Commands Plugin</value>
+  </data>
 </root>

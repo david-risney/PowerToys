@@ -15,25 +15,20 @@ using Wox.Plugin;
 
 namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 {
-    public class Main : IPlugin, IPluginI18n, IDisposable, ISettingProvider
+    public class Main : IPlugin, IPluginI18n
     {
-        private PluginInitContext Context { get; set; }
-
-        public string Name => "PowerToysCommands";
-
-        public string Description => "Run PowerToys tools from PowerToys Launcher";
-
-        private bool _disposed;
-        private ResultHelper _resultHelper = new ResultHelper();
-
-        public IEnumerable<PluginAdditionalOption> AdditionalOptions => new List<PluginAdditionalOption>()
+        public void Init(PluginInitContext context)
         {
-        };
+        }
+
+        public string Name => Resources.PluginTitle;
+
+        public string Description => Resources.PluginDescription;
+
+        private ResultHelper _resultHelper = new ResultHelper();
 
         public List<Result> Query(Query query)
         {
-            bool isGlobalQuery = string.IsNullOrEmpty(query.ActionKeyword);
-
             if (query == null)
             {
                 throw new ArgumentNullException(paramName: nameof(query));
@@ -48,44 +43,8 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
             return _resultHelper.GetCommandsMatchingQuery(query).ToList();
         }
 
-        public void Init(PluginInitContext context)
-        {
-        }
+        public string GetTranslatedPluginTitle() => Name;
 
-        public string GetTranslatedPluginTitle()
-        {
-            return Name;
-        }
-
-        public string GetTranslatedPluginDescription()
-        {
-            return Description;
-        }
-
-        public Control CreateSettingPanel()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateSettings(PowerLauncherPluginSettings settings)
-        {
-        }
-
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    _disposed = true;
-                }
-            }
-        }
+        public string GetTranslatedPluginDescription() => Description;
     }
 }

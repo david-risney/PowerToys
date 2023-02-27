@@ -15,7 +15,7 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
     {
         public ResultHelper()
         {
-            AllCommands = new List<Result>
+            AllCommandResults = new List<Result>
             {
                 CreateResult(
                     "PowerToys ColorPicker",
@@ -58,7 +58,6 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
         {
             return new Result
             {
-                // Using CurrentCulture since this is user facing
                 Title = title,
                 IcoPath = iconPath,
                 Score = 300,
@@ -67,11 +66,11 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
             };
         }
 
-        public List<Result> AllCommands { get; private set; }
+        public List<Result> AllCommandResults { get; private set; }
 
         public IEnumerable<Result> GetCommandsMatchingQuery(Query query)
         {
-            return AllCommands.Where(
+            return AllCommandResults.Where(
                 commandResult => DoesResultMatchQuery(commandResult, query));
         }
 

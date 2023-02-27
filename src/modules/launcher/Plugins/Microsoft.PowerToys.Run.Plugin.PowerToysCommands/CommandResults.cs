@@ -17,7 +17,7 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
     {
         // Enum of the different PowerToys Commands
         // sorted alphabetically.
-        private enum Command
+        public enum Command
         {
             ColorPicker,
             FancyZonesEditor,

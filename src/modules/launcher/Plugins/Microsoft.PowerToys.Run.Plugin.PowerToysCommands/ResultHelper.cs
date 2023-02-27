@@ -2,49 +2,20 @@
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using interop;
+using Microsoft.PowerToys.Run.Plugin.PowerToysCommands.Properties;
 using Wox.Plugin;
 
 namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 {
     public class ResultHelper
     {
-        public ResultHelper()
-        {
-            AllCommandResults = new List<Result>
-            {
-                CreateResult(
-                    "PowerToys ColorPicker",
-                    "images/ColorPicker.png",
-                    "Run PowerToys Color Picker",
-                    Command.ColorPicker),
-                CreateResult(
-                    "PowerToys FancyZones Editor",
-                    "images/FancyZones.png",
-                    "Run PowerToys FancyZones Editor",
-                    Command.FancyZonesEditor),
-                CreateResult(
-                    "PowerToys MeasureTool",
-                    "images/MeasureTool.png",
-                    "Run PowerToys Measure Tool",
-                    Command.MeasureTool),
-                CreateResult(
-                    "PowerToys Text Extractor",
-                    "images/PowerOCR.png",
-                    "Run PowerToys Text Extractor",
-                    Command.PowerOCR),
-                CreateResult(
-                    "PowerToys Shortcut Guide",
-                    "images/ShortcutGuide.png",
-                    "Show PowerToys Shortcut Guide",
-                    Command.ShortcutGuide),
-            };
-        }
-
         private enum Command
         {
             ColorPicker,
@@ -52,6 +23,38 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
             MeasureTool,
             PowerOCR,
             ShortcutGuide,
+        }
+
+        public ResultHelper()
+        {
+            AllCommandResults = new List<Result>
+            {
+                CreateResult(
+                    Resources.CommandColorPickerTitle,
+                    "images/ColorPicker.png",
+                    Resources.CommandColorPickerSubTitle,
+                    Command.ColorPicker),
+                CreateResult(
+                    Resources.CommandFancyZonesEditorTitle,
+                    "images/FancyZones.png",
+                    Resources.CommandFancyZonesEditorSubTitle,
+                    Command.FancyZonesEditor),
+                CreateResult(
+                    Resources.CommandMeasureToolTitle,
+                    "images/MeasureTool.png",
+                    Resources.CommandMeasureToolSubTitle,
+                    Command.MeasureTool),
+                CreateResult(
+                    Resources.CommandPowerOCRTitle,
+                    "images/PowerOCR.png",
+                    Resources.CommandPowerOCRSubTitle,
+                    Command.PowerOCR),
+                CreateResult(
+                    Resources.CommandShortcutGuideTitle,
+                    "images/ShortcutGuide.png",
+                    Resources.CommandShortcutGuideSubTitle,
+                    Command.ShortcutGuide),
+            };
         }
 
         private Result CreateResult(string title, string iconPath, string subTitle, Command command)
@@ -70,14 +73,23 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 
         public IEnumerable<Result> GetCommandsMatchingQuery(Query query)
         {
-            return AllCommandResults.Where(
+            var filteredResults = AllCommandResults.Where(
                 commandResult => DoesResultMatchQuery(commandResult, query));
+#if DEBUG
+            {
+                string queryText = "PowerToys Commands Query: '" + query.RawQuery + "' '" + query.Search + "'";
+                string resultText = "PowerToys Commands Results: " + string.Join(' ', filteredResults.Select(result => result.Title));
+                Console.WriteLine(queryText);
+                Console.WriteLine(resultText);
+            }
+#endif
+            return filteredResults;
         }
 
         private static bool DoesResultMatchQuery(Result result, Query query)
         {
-            return result.Title.ToLower().Contains(query.Search) ||
-                result.SubTitle.ToLower().Contains(query.Search);
+            return result.Title.ToLower().Contains(query.Search.ToLower()) ||
+                result.SubTitle.ToLower().Contains(query.Search.ToLower());
         }
 
         private static bool SetEvent(string eventName)

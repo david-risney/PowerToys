@@ -117,6 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CommandColorPickerSubTitle" xml:space="preserve">
+    <value>Run PowerToys Color Picker</value>
+  </data>
+  <data name="CommandColorPickerTitle" xml:space="preserve">
+    <value>PowerToys Color Picker</value>
+  </data>
+  <data name="CommandFancyZonesEditorSubTitle" xml:space="preserve">
+    <value>Run PowerToys FancyZones Editor</value>
+  </data>
+  <data name="CommandFancyZonesEditorTitle" xml:space="preserve">
+    <value>PowerToys FancyZones Editor</value>
+  </data>
+  <data name="CommandMeasureToolSubTitle" xml:space="preserve">
+    <value>Run PowerToys Screen Ruler</value>
+  </data>
+  <data name="CommandMeasureToolTitle" xml:space="preserve">
+    <value>PowerToys Screen Ruler</value>
+  </data>
+  <data name="CommandPowerOCRSubTitle" xml:space="preserve">
+    <value>Run PowerToys Text Extractor</value>
+  </data>
+  <data name="CommandPowerOCRTitle" xml:space="preserve">
+    <value>PowerToys Text Extractor</value>
+  </data>
+  <data name="CommandShortcutGuideSubTitle" xml:space="preserve">
+    <value>Show PowerToys Shortcut Guide</value>
+  </data>
+  <data name="CommandShortcutGuideTitle" xml:space="preserve">
+    <value>PowerToys Shortcut Guide</value>
+  </data>
   <data name="PluginDescription" xml:space="preserve">
     <value>Run PowerToys commands from PowerToys Run</value>
   </data>

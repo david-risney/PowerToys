@@ -61,6 +61,96 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run PowerToys Color Picker.
+        /// </summary>
+        public static string CommandColorPickerSubTitle {
+            get {
+                return ResourceManager.GetString("CommandColorPickerSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PowerToys Color Picker.
+        /// </summary>
+        public static string CommandColorPickerTitle {
+            get {
+                return ResourceManager.GetString("CommandColorPickerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run PowerToys FancyZones Editor.
+        /// </summary>
+        public static string CommandFancyZonesEditorSubTitle {
+            get {
+                return ResourceManager.GetString("CommandFancyZonesEditorSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PowerToys FancyZones Editor.
+        /// </summary>
+        public static string CommandFancyZonesEditorTitle {
+            get {
+                return ResourceManager.GetString("CommandFancyZonesEditorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run PowerToys Screen Ruler.
+        /// </summary>
+        public static string CommandMeasureToolSubTitle {
+            get {
+                return ResourceManager.GetString("CommandMeasureToolSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PowerToys Screen Ruler.
+        /// </summary>
+        public static string CommandMeasureToolTitle {
+            get {
+                return ResourceManager.GetString("CommandMeasureToolTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run PowerToys Text Extractor.
+        /// </summary>
+        public static string CommandPowerOCRSubTitle {
+            get {
+                return ResourceManager.GetString("CommandPowerOCRSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PowerToys Text Extractor.
+        /// </summary>
+        public static string CommandPowerOCRTitle {
+            get {
+                return ResourceManager.GetString("CommandPowerOCRTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show PowerToys Shortcut Guide.
+        /// </summary>
+        public static string CommandShortcutGuideSubTitle {
+            get {
+                return ResourceManager.GetString("CommandShortcutGuideSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PowerToys Shortcut Guide.
+        /// </summary>
+        public static string CommandShortcutGuideTitle {
+            get {
+                return ResourceManager.GetString("CommandShortcutGuideTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run PowerToys commands from PowerToys Run.
         /// </summary>
         public static string PluginDescription {

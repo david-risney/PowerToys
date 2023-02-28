@@ -13,6 +13,12 @@ using Wox.Plugin;
 
 namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 {
+    // This class manages all aspects of results for the PowerToys
+    // Commands plugin. It creates the list of all possible commands
+    // as Results and allows callers to query for the matching subset
+    // and handles invoking the commands. Invocation of commands is
+    // via setting named events which the different PowerToys
+    // commands are waiting on.
     public class CommandResults
     {
         // Enum of the different PowerToys Commands
@@ -78,19 +84,24 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 
         public IEnumerable<Result> GetCommandsMatchingQuery(Query query)
         {
-            var filteredResults = AllCommandResults.Where(
-                commandResult => DoesResultMatchQuery(commandResult, query));
-#if DEBUG
+            ArgumentNullException.ThrowIfNull(query, nameof(query));
+
+            IEnumerable<Result> results = Enumerable.Empty<Result>();
+
+            // If provided no search part of the query, which can happen
+            // when invoking the plugin directly but without yet entering
+            // a search query, then return no commands.
+            if (!string.IsNullOrEmpty(query.Search))
             {
-                string queryText = "PowerToys Commands Query: '" + query.RawQuery + "' '" + query.Search + "'";
-                string resultText = "PowerToys Commands Results: " + string.Join(' ', filteredResults.Select(result => result.Title));
-                Console.WriteLine(queryText);
-                Console.WriteLine(resultText);
+                results = AllCommandResults.Where(
+                    commandResult => DoesResultMatchQuery(commandResult, query));
             }
-#endif
-            return filteredResults;
+
+            return results;
         }
 
+        // Return true if the result's title or subtitle partially matches the queries search
+        // ignoring case.
         private static bool DoesResultMatchQuery(Result result, Query query)
         {
             return result.Title.ToLower().Contains(query.Search.ToLower()) ||

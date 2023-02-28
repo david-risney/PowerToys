@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using Microsoft.PowerToys.Run.Plugin.PowerToysCommands.Properties;
+using Microsoft.PowerToys.Settings.UI.Library;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Wox.Infrastructure;
@@ -45,36 +46,40 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands.UnitTests
         }
 
         [TestMethod]
-        public void CommandQueryMatchExact()
+        public void CommandQueryMatches()
         {
             var commandResults = new CommandResults();
+            Tuple<string, string>[] expected =
+            {
+                new Tuple<string, string>("PowerToys Color Picker", Resources.CommandColorPickerTitle),
+                new Tuple<string, string>("pOwertOys cOlor pIcker", Resources.CommandColorPickerTitle),
+                new Tuple<string, string>("olor Picke", Resources.CommandColorPickerTitle),
+            };
 
             // Run a query for Color Picker and make sure we get exactly one result that matches
-            var actualResults = commandResults.GetCommandsMatchingQuery(new Query("PowerToys Color Picker")).ToList();
-            Assert.AreEqual(1, actualResults.Count);
-            Assert.AreEqual(Resources.CommandColorPickerTitle, actualResults[0].Title);
+            foreach (var entry in expected)
+            {
+                var actualResults = commandResults.GetCommandsMatchingQuery(new Query(entry.Item1)).ToList();
+                Assert.AreEqual(1, actualResults.Count);
+                Assert.AreEqual(entry.Item2, actualResults[0].Title);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("")]
+        [DataRow("unexpected input")]
+        public void CommandQueryMatchNone(string queryText)
+        {
+            var commandResults = new CommandResults();
+            var actualResults = commandResults.GetCommandsMatchingQuery(new Query(queryText)).ToList();
+            Assert.AreEqual(0, actualResults.Count);
         }
 
         [TestMethod]
-        public void CommandQueryMatchCaseInsensitive()
+        public void CommandQueryThrowsOnNullQuery()
         {
             var commandResults = new CommandResults();
-
-            // Run a query for Color Picker and make sure we get exactly one result that matches
-            var actualResults = commandResults.GetCommandsMatchingQuery(new Query("pOwertOys cOlor pIcker")).ToList();
-            Assert.AreEqual(1, actualResults.Count);
-            Assert.AreEqual(Resources.CommandColorPickerTitle, actualResults[0].Title);
-        }
-
-        [TestMethod]
-        public void CommandQueryMatchPartial()
-        {
-            var commandResults = new CommandResults();
-
-            // Run a query for Color Picker and make sure we get exactly one result that matches
-            var actualResults = commandResults.GetCommandsMatchingQuery(new Query("olor Picke")).ToList();
-            Assert.AreEqual(1, actualResults.Count);
-            Assert.AreEqual(Resources.CommandColorPickerTitle, actualResults[0].Title);
+            Assert.ThrowsException<ArgumentNullException>(() => commandResults.GetCommandsMatchingQuery(null));
         }
     }
 }

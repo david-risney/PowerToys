@@ -10,6 +10,10 @@ using Wox.Plugin;
 
 namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 {
+    // This is the main class of the PowerToys Run plugin PowerToysCommands
+    // which supports querying for PowerToys commands. See CommandResults
+    // for where the command Results are actually created, created, and
+    // invoked.
     public class Main : IPlugin, IPluginI18n
     {
         public void Init(PluginInitContext context)
@@ -24,17 +28,6 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands
 
         public List<Result> Query(Query query)
         {
-            if (query == null)
-            {
-                throw new ArgumentNullException(paramName: nameof(query));
-            }
-
-            // Happens if the user has only typed the action key so far
-            if (string.IsNullOrEmpty(query.Search))
-            {
-                return new List<Result>();
-            }
-
             return _commandResults.GetCommandsMatchingQuery(query).ToList();
         }
 

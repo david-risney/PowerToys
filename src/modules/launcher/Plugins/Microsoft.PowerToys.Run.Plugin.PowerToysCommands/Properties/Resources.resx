@@ -148,9 +148,9 @@
     <value>PowerToys Shortcut Guide</value>
   </data>
   <data name="PluginDescription" xml:space="preserve">
-    <value>Run PowerToys commands from PowerToys Run</value>
+    <value>Run PowerToys commands.</value>
   </data>
   <data name="PluginTitle" xml:space="preserve">
-    <value>PowerToys Commands Plugin</value>
+    <value>PowerToys Commands</value>
   </data>
 </root>

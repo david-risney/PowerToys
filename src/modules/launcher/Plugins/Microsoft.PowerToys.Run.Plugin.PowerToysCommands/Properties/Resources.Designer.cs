@@ -151,7 +151,7 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Run PowerToys commands from PowerToys Run.
+        ///   Looks up a localized string similar to Run PowerToys commands..
         /// </summary>
         public static string PluginDescription {
             get {
@@ -160,7 +160,7 @@ namespace Microsoft.PowerToys.Run.Plugin.PowerToysCommands.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PowerToys Commands Plugin.
+        ///   Looks up a localized string similar to PowerToys Commands.
         /// </summary>
         public static string PluginTitle {
             get {
